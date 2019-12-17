@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.bdtech.estate.data.db.AppDatabase
-import net.bdtech.estate.data.db.entities.Quote
+import net.bdtech.estate.data.db.entities.Owner
 import net.bdtech.estate.data.network.MyApi
 import net.bdtech.estate.data.network.SafeApiRequest
 import net.bdtech.estate.data.preferences.PreferenceProvider
@@ -16,13 +16,13 @@ import java.time.temporal.ChronoUnit
 
 private val MINIMUM_INTERVAL = 6
 
-class QuotesRepository(
+class OwnerRepository(
     private val api: MyApi,
     private val db: AppDatabase,
     private val prefs: PreferenceProvider
 ) : SafeApiRequest() {
 
-    private val quotes = MutableLiveData<List<Quote>>()
+    private val quotes = MutableLiveData<List<Owner>>()
 
     init {
         quotes.observeForever {
@@ -30,7 +30,7 @@ class QuotesRepository(
         }
     }
 
-    suspend fun getQuotes(): LiveData<List<Quote>> {
+    suspend fun getQuotes(): LiveData<List<Owner>> {
         return withContext(Dispatchers.IO) {
             fetchQuotes()
             db.getQuoteDao().getQuotes()
@@ -42,8 +42,8 @@ class QuotesRepository(
 
         if (lastSavedAt == null || isFetchNeeded(LocalDateTime.parse(lastSavedAt))) {
             try {
-                val response = apiRequest { api.getQuotes() }
-                quotes.postValue(response.quotes)
+                val response = apiRequest { api.getOwner(10.0, 20.0) }
+                quotes.postValue(response.owners)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -55,10 +55,10 @@ class QuotesRepository(
     }
 
 
-    private fun saveQuotes(quotes: List<Quote>) {
+    private fun saveQuotes(owners: List<Owner>) {
         Coroutines.io {
             prefs.savelastSavedAt(LocalDateTime.now().toString())
-            db.getQuoteDao().saveAllQuotes(quotes)
+            db.getQuoteDao().saveAllQuotes(owners)
         }
     }
 

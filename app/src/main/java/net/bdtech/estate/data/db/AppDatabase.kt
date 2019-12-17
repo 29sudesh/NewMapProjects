@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import net.bdtech.estate.data.db.entities.Quote
+import net.bdtech.estate.data.db.entities.Owner
 import net.bdtech.estate.data.db.entities.User
 
 @Database(
-    entities = [User::class, Quote::class],
+    entities = [User::class, Owner::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {

@@ -4,4 +4,7 @@
 
     <string name="radio_selected_1">Select 1</string>
     <string name="radio_selected_2">Select 2</string>
+    <string name="contacts">Roomers</string>
+    <string name="calls">Owners</string>
+    <string name="chats">Seekers</string>
 </resources>

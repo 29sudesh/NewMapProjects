@@ -1,11 +1,11 @@
-package net.bdtech.estate.ui.home.quotes
+package net.bdtech.estate.ui.home.owner
 
 import androidx.lifecycle.ViewModel;
-import net.bdtech.estate.data.repositories.QuotesRepository
+import net.bdtech.estate.data.repositories.OwnerRepository
 import net.bdtech.estate.util.lazyDeferred
 
-class QuotesViewModel(
-    repository: QuotesRepository
+class OwnerViewModel(
+    repository: OwnerRepository
 ) : ViewModel() {
 
     val quotes by lazyDeferred {

@@ -1,15 +1,12 @@
 package net.bdtech.estate.data.network
 
 import net.bdtech.estate.data.network.responses.AuthResponse
-import net.bdtech.estate.data.network.responses.QuotesResponse
+import net.bdtech.estate.data.network.responses.OwnerResponse
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface MyApi {
 
@@ -28,8 +25,8 @@ interface MyApi {
         @Field("password") password: String
     ) : Response<AuthResponse>
 
-    @GET("quotes")
-    suspend fun getQuotes() : Response<QuotesResponse>
+    @GET("recommendations/seeker/owners")
+    suspend fun getOwner(@Query("lat1") lat1:Double,@Query("long1") long1:Double) : Response<OwnerResponse>
 
     companion object{
         operator fun invoke(
@@ -42,7 +39,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okkHttpclient)
-                .baseUrl("https://api.bdtech.in/course-apis/mvvm/")
+                .baseUrl("http://e6929a25.ngrok.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)

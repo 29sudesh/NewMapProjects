@@ -5,15 +5,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import net.bdtech.estate.data.db.entities.Quote
+import net.bdtech.estate.data.db.entities.Owner
 
 @Dao
 interface QuoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveAllQuotes(quotes : List<Quote>)
+    fun saveAllQuotes(owners : List<Owner>)
 
-    @Query("SELECT * FROM Quote")
-    fun getQuotes() : LiveData<List<Quote>>
+    @Query("SELECT * FROM Owner")
+    fun getQuotes() : LiveData<List<Owner>>
 
 }

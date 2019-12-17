@@ -1,15 +1,15 @@
-package net.bdtech.estate.ui.home.quotes
+package net.bdtech.estate.ui.home.owner
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import net.bdtech.estate.data.repositories.QuotesRepository
+import net.bdtech.estate.data.repositories.OwnerRepository
 
 @Suppress("UNCHECKED_CAST")
-class QuotesViewModelFactory(
-    private val repository: QuotesRepository
+class OwnerViewModelFactory(
+    private val repository: OwnerRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return QuotesViewModel(repository) as T
+        return OwnerViewModel(repository) as T
     }
 }
